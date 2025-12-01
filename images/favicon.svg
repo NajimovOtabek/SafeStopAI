@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="neon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#9FFFEF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38F1D8;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path d="M256 32C174 32 104.8 66.8 64 120c0 0-32 128-32 128s32 128 32 128c40.8 53.2 110 88 192 88s151.2-34.8 192-88c0 0 32-128 32-128s-32-128-32-128C407.2 66.8 338 32 256 32z" fill="none" stroke="url(#neon-grad)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M256 112c-79.5 0-144 64.5-144 144s64.5 144 144 144 144-64.5 144-144-64.5-144-144-144zm0 256c-61.9 0-112-50.1-112-112s50.1-112 112-112 112 50.1 112 112-50.1 112-112 112z" fill="#9FFFEF"/>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="200" fill="#000000">S</text>
+</svg>
