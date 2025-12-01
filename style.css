@@ -733,28 +733,56 @@ ul {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
     flex-wrap: wrap;
-    gap: 30px;
+    gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .footer-logo h3 {
-    font-family: var(--font-main-title);
-    font-size: 2rem;
-    margin-bottom: 5px;
+    font-family: 'Audiowide', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
 }
 
 .footer-contact h4 {
     color: var(--electric-teal);
-    margin-bottom: 10px;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.footer-qr {
+    text-align: center;
+}
+
+.qr-code-img {
+    border: 2px solid var(--neon-cyan);
+    border-radius: 10px;
+    padding: 5px;
+    background: #fff;
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+
+.qr-code-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--neon-cyan);
+}
+
+.footer-qr p {
+    font-size: 0.8rem;
+    color: var(--neon-cyan);
+    margin: 0;
 }
 
 .footer-bottom {
     text-align: center;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.footer-bottom p {
     font-size: 0.9rem;
-    color: #666;
+    color: #e0e0e0;
 }
 
 /* Video Wrapper */
