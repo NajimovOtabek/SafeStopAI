@@ -215,8 +215,9 @@
                                 </tr>
                                 <tr>
                                     <td>Networking Layer (MQTT, DSRC, C-V2X)</td>
-                                    <td>Enable inter-module and inter-vehicle alerts; transmit encrypted “Emergency Stop
-                                        in Progress” messages; maintain low-latency communication.</td>
+                                    <td class="highlight-col">Enable inter-module and inter-vehicle alerts; transmit
+                                        encrypted “Emergency Stop
+                                        in Progress” messages; maintain low-latency communication (< 127ms).</td>
                                 </tr>
                                 <tr>
                                     <td>Data Logging & Compliance Layer</td>
@@ -243,9 +244,16 @@
                         <li><strong>Path Assessment:</strong> Checks forward path for obstacles.</li>
                         <li><strong>Safe Zone Search:</strong> Searches for safe zone (e.g., road shoulder) if path is
                             clear.</li>
-                        <li><strong>Controlled Maneuver:</strong> Smooth deceleration and steering toward safe zone.
+                        <li><strong>Controlled Maneuver (4-Phase Policy):</strong>
+                            <ul style="padding-left: 20px; margin-top: 5px; list-style: circle;">
+                                <li><strong>Phase 1: Stabilize</strong> - Immediate vehicle stabilization.</li>
+                                <li><strong>Phase 2: Lateral Nudge</strong> - Initiate lane change if safe.</li>
+                                <li><strong>Phase 3: Decelerate</strong> - Jerk-limited braking.</li>
+                                <li><strong>Phase 4: Hold</strong> - Secure stop in safe zone.</li>
+                            </ul>
                         </li>
-                        <li><strong>Final Stop & Logging:</strong> Complete stop and forensic logging.</li>
+                        <li><strong>Final Stop & Logging:</strong> Complete stop and forensic logging (50ms reaction
+                            time).</li>
                     </ol>
                 </div>
             </div>
@@ -266,6 +274,64 @@
                 <div class="tech-item">
                     <h3>Protocols</h3>
                     <p>MQTT, DSRC/C-V2X, TLS/HTTPS.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Developer Resources Section -->
+    <section id="developer" class="section dev-section" style="background: #111;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Developer <span class="highlight">Resources</span></h2>
+                <div class="divider"></div>
+            </div>
+
+            <div class="tech-content">
+                <div class="tech-architecture">
+                    <h3>ROS2 Implementation</h3>
+                    <p style="margin-bottom: 20px; color: #ccc;">For engineers and technical validation, the full ROS2
+                        backend is available. Supports ROS2 Humble/Foxy.</p>
+
+                    <h4 style="color: var(--electric-teal); margin-bottom: 10px;">Core Nodes</h4>
+                    <ul
+                        style="list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px;">
+                        <li style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                            <code>health_monitor</code>
+                        </li>
+                        <li style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                            <code>emergency_planner</code>
+                        </li>
+                        <li style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                            <code>safe_stop_control</code>
+                        </li>
+                        <li style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 5px;">
+                            <code>v2x_bridge</code>
+                        </li>
+                    </ul>
+
+                    <a href="https://github.com/NajimovOtabek/SafeStopAI-demo" target="_blank" class="btn-primary"
+                        style="display: inline-flex; align-items: center; gap: 10px;">
+                        <svg height="20" width="20" viewBox="0 0 16 16" fill="currentColor">
+                            <path
+                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                            </path>
+                        </svg>
+                        View on GitHub
+                    </a>
+                </div>
+
+                <div class="operational-flow">
+                    <h3>Quick Start</h3>
+                    <div
+                        style="background: #1e1e1e; padding: 20px; border-radius: 10px; font-family: monospace; color: #d4d4d4; border: 1px solid #333;">
+                        <p style="color: #6a9955;"># Install dependencies</p>
+                        <p>colcon build --packages-select safestop_ai</p>
+                        <p>source install/setup.bash</p>
+                        <br>
+                        <p style="color: #6a9955;"># Run the full system</p>
+                        <p>ros2 launch safestop_ai safestop.launch.py</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -340,7 +406,9 @@
                 <div class="prototype-text">
                     <p>The Vehicle SafeStop AI system is not merely a concept but a functioning prototype that validates
                         our architecture in a tangible way. It proves the core safe-stop behavior, integrates the
-                        complete sensor and AI stack, and provides a reliable platform for real-world simulation.</p>
+                        complete sensor and AI stack, and provides a reliable platform for real-world simulation. We
+                        utilized <strong>Cartographer</strong> and <strong>SLAM Toolbox</strong> to create high-fidelity
+                        maps of our test environments.</p>
 
                     <div class="prototype-specs">
                         <h3>Prototype Specifications</h3>
@@ -354,8 +422,9 @@
                     <div class="validation-strategy">
                         <h3>Rigorous Testing Process</h3>
                         <p>Our multi-stage validation strategy includes Unit & Integration Tests, System Tests in
-                            Gazebo, and Hardware Tests on the TurtleBot3. We employ Fault Injection and KPI-Driven
-                            Validation inspired by ISO 26262.</p>
+                            Gazebo, and Hardware Tests on the TurtleBot3. Testing was conducted in a complex Gazebo
+                            environment featuring traffic, pedestrians, and static obstacles to validate the 4-phase
+                            control policy.</p>
                     </div>
                 </div>
                 <div class="video-wrapper">
